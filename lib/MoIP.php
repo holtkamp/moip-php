@@ -258,8 +258,6 @@ class MoIP
             !isset($params['cartao']['portador']['nome']) or
             !isset($params['cartao']['portador']['identidade_numero']) or
             !isset($params['cartao']['portador']['identidade_tipo']) or
-            !isset($params['cartao']['portador']['telefone']) or
-            !isset($params['cartao']['portador']['data_nascimento']) or
             !isset($params['cartao']['parcelamento']) or
             !isset($params['cartao']['parcelamento']['parcelas']) or
             !isset($params['cartao']['parcelamento']['recebimento'])
