@@ -5,7 +5,7 @@
  * @author Menno Holtkamp
  * @author Herberth Amaral
  * @author Wesley Willians
- * @author Al� Borba
+ * @author Alê Borba
  * @author Diego Puddu
  * @version 1.2
  * @license <a href="http://www.opensource.org/licenses/bsd-license.php">BSD License</a>
@@ -217,7 +217,7 @@ class MoIP
         }
 	else
 	{
-		throw new Exception("A vari�vel tipo deve conter os valores 'Unico' ou 'Direto'");
+		throw new Exception("A variável tipo deve conter os valores 'Unico' ou 'Direto'");
 	}
 
         return $this;
@@ -235,7 +235,7 @@ class MoIP
     public function setPagamentoDireto($params)
     {
         if (!isset($params['forma']))
-            throw new InvalidArgumentException("Voc� deve especificar a forma de pagamento em setPagamentoDireto.");
+            throw new InvalidArgumentException("Você deve especificar a forma de pagamento em setPagamentoDireto.");
 
 
         if (
@@ -245,8 +245,8 @@ class MoIP
 
         )
         {
-            throw new InvalidArgumentException("Voc� deve especificar uma institui��o de pagamento v�lida quando".
-                " a forma de forma de pagamento � via d�bito ou cartao");
+            throw new InvalidArgumentException("Você deve especificar uma instituição de pagamento válida quando".
+                " a forma de forma de pagamento é via débito ou cartao");
         }
 
         if ($params['forma'] == 'cartao_credito' and
@@ -264,7 +264,7 @@ class MoIP
            )
           )
         {
-            throw new InvalidArgumentException("Os dados do cart�o foram passados de forma incorreta.");
+            throw new InvalidArgumentException("Os dados do cartão foram passados de forma incorreta.");
         }
 
         $pd = $this->xml->InstrucaoUnica->addChild('PagamentoDireto');
@@ -314,7 +314,7 @@ class MoIP
             !isset($credential['key']) or
             strlen($credential['token'])!=32 or
             strlen($credential['key'])!=40)
-            throw new InvalidArgumentException("credential inv�lidas");
+            throw new InvalidArgumentException("credential inválidas");
 
         $this->credential = $credential;
         return $this;
@@ -330,7 +330,7 @@ class MoIP
     public function setEnvironment($environment)
     {
         if ($environment!='sandbox' and $environment!='producao')
-            throw new InvalidArgumentException("Ambiente inv�lido");
+            throw new InvalidArgumentException("Ambiente inválido");
 
         $this->environment = $environment;
         return $this;
@@ -349,7 +349,7 @@ class MoIP
         if (!isset($this->credential)  or
             !isset($this->reason) or
             !isset($this->uniqueID))
-            throw new InvalidArgumentException("Dados requeridos n�o preenchidos. Voc� deve especificar as credenciais, a raz�o do pagamento e seu ID pr�prio");
+            throw new InvalidArgumentException("Dados requeridos não preenchidos. Você deve especificar as credenciais, a razão do pagamento e seu ID próprio");
 
         $payer = $this->payer;
 
@@ -428,18 +428,18 @@ class MoIP
         if($args!=null)
         {
             if (!is_array($args))
-                throw new InvalidArgumentException("Os par�metros extra devem ser passados em um array");
+                throw new InvalidArgumentException("Os parâmetros extra devem ser passados em um array");
 
             if($way=='boleto')
             {
-                //argumentos poss�veis: dias de expira��o, instru��es e logo da URL
+                //argumentos possíveis: dias de expiração, instruções e logo da URL
                 if (isset($args['dias_expiracao']) and isset($args['dias_expiracao']['tipo']) and isset($args['dias_expiracao']['dias']))
                 {
                     $this->payment_way_args = $args;
                 }
                 else
                 {
-                    throw new InvalidArgumentException("Par�metros passados de forma incorreta");
+                    throw new InvalidArgumentException("Parâmetros passados de forma incorreta");
                 }
             }
         }
@@ -570,13 +570,13 @@ class MoIP
     public function addComission($param)
     {
         if (!isset($param['login_moip']))
-            throw new InvalidArgumentException('Voc� deve especificar um usu�rio para comissionar.');
+            throw new InvalidArgumentException('Você deve especificar um usuário para comissionar.');
 
         if (!isset($param['valor_fixo']) or !isset($param['valor_percentual']))
-            throw new InvalidArgumentException('Voc� deve especificar um tipo de valor para comissionar.');
+            throw new InvalidArgumentException('Você deve especificar um tipo de valor para comissionar.');
 
         if (isset($param['valor_fixo']) and isset($param['valor_percentual']))
-            throw new InvalidArgumentException('Voc� deve especificar somente um tipo de valor de comiss�o');
+            throw new InvalidArgumentException('Você deve especificar somente um tipo de valor de comissão');
 
         if (!isset($this->xml->InstrucaoUnica->Comissoes))
             $this->xml->InstrucaoUnica->addChild('Comissoes');
@@ -642,24 +642,24 @@ class MoIP
 
         if (empty($params) or !isset($params['tipo']) or !isset($params['prazo']))
         {
-            throw new InvalidArgumentException('Voc� deve especificar o tipo de frete (proprio ou correios) e o prazo de entrega');
+            throw new InvalidArgumentException('Você deve especificar o tipo de frete (proprio ou correios) e o prazo de entrega');
         }
 
         if (!isset($this->delivery_type[$params['tipo']]))
         {
-            throw new InvalidArgumentException('Tipo de frete inv�lido. Op��es v�lidas: "proprio" ou "correios"');
+            throw new InvalidArgumentException('Tipo de frete inválido. Opções válidas: "proprio" ou "correios"');
         }
 
         if (is_array($params['prazo']))
         {
             if (is_array($params['prazo']) and !isset($this->delivery_type_time[$params['prazo']['tipo']]))
             {
-                throw new InvalidArgumentException('Tipo de prazo de entrega inv�lido. Op��es v�lidas: "uteis" ou "corridos".');
+                throw new InvalidArgumentException('Tipo de prazo de entrega inválido. Opções válidas: "uteis" ou "corridos".');
             }
 
             if (!isset($params['prazo']['dias']))
             {
-                throw new InvalidArgumentException('Voc� deve especificar os dias do prazo de entrega');
+                throw new InvalidArgumentException('Você deve especificar os dias do prazo de entrega');
             }
         }
 
@@ -667,23 +667,23 @@ class MoIP
         {
             if ((!isset($params['correios']) or empty($params['correios'])) )
             {
-                throw new InvalidArgumentException('� necess�rio especificar os '.
-                    'par�metros dos correios quando o '.
-                    'tipo de frete � Correios');
+                throw new InvalidArgumentException('É necessário especificar os '.
+                    'parâmetros dos correios quando o '.
+                    'tipo de frete é Correios');
 
             }
 
             if (!isset($params['correios']['peso']) or !isset($params['correios']['forma_entrega']))
             {
-                throw new InvalidArgumentException('� necess�rio passar os par�metros'.
-                    ' dos correios quando a forma de envio s�o os Correios');
+                throw new InvalidArgumentException('É necessário passar os parâmetros'.
+                    ' dos correios quando a forma de envio são os Correios');
             }
 
         }
         else
         {
             if (!isset($params['valor_fixo']) and !isset($params['valor_percentual']))
-                throw new InvalidArgumentException('Voc� deve especificar valor_fixo ou valor_percentual quando o tipo de frete � pr�prio');
+                throw new InvalidArgumentException('Você deve especificar valor_fixo ou valor_percentual quando o tipo de frete é próprio');
         }
 
         //End of validate
@@ -731,7 +731,7 @@ class MoIP
         $this->xml->InstrucaoUnica->addChild('Razao' , $this->reason);
 
         if (empty($this->value))
-            throw new InvalidArgumentException('Erro: o valor da transa��o deve ser especificado');
+            throw new InvalidArgumentException('Erro: o valor da transação deve ser especificado');
 
         $this->xml->InstrucaoUnica->addChild('Valores')
             ->addChild('Valor',$this->value)
@@ -888,7 +888,7 @@ class MoIP
     public function verifyPagamentoDireto($login_moip,$client=null)
     {
         if (!isset($this->credential))
-            throw new Exception("Voc� deve especificar as credenciais (token/key) da API antes de chamar este m�todo");
+            throw new Exception("Você deve especificar as credenciais (token/key) da API antes de chamar este método");
 
         if ($client==null) {
             $client = new MoIPClient();
@@ -927,7 +927,7 @@ class MoIP
     public function verifyParcelValues($login_moip,$total_parcels,$rate,$simulated_value,$client=null)
     {
         if (!isset($this->credential)) {
-            throw new Exception("Voc� deve especificar as credenciais (token/key) da API antes de chamar este m�todo");
+            throw new Exception("Você deve especificar as credenciais (token/key) da API antes de chamar este método");
         }
 
         if ($client==null) {
@@ -957,7 +957,7 @@ class MoIP
     public function queryInstruction($token,$client=null)
     {
         if (!isset($this->credential))
-            throw new Exception("Voc� deve especificar as credenciais (token/key) da API antes de chamar este m�todo");
+            throw new Exception("Você deve especificar as credenciais (token/key) da API antes de chamar este método");
 
         $url = $this->environment == "producao"?"https://www.moip.com.br/ws/alpha/ConsultarInstrucao/":"https://desenvolvedor.moip.com.br/sandbox/ws/alpha/ConsultarInstrucao/";
 
